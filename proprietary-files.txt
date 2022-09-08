@@ -662,6 +662,7 @@ vendor/lib64/camera/com.qti.tuned.mot_dubai_ov50a.bin
 vendor/lib64/camera/com.qti.tuned.mot_dubai_s5kjn1.bin
 
 # Charger
+vendor/bin/charge_only_mode
 vendor/bin/hvdcp_opti
 vendor/etc/init/vendor.qti.hardware.charger_monitor@1.0-service.rc
 
