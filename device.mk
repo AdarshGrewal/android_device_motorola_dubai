@@ -29,27 +29,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 # Inherit virtual_ab_ota product
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
-# Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
-
-PRODUCT_ENFORCE_RRO_TARGETS := *
-
-PRODUCT_PACKAGES += \
-    FrameworksResCommon_Sys \
-    CarrierConfigResCommon_Sys \
-    CellBroadcastReceiverResCommon_Sys \
-    SystemUIResCommon_Sys \
-    TelecommResCommon_Sys \
-    TelephonyResCommon_Sys \
-    WifiResCommon_Sys \
-    FrameworksResTarget \
-    WifiResTarget
-
-PRODUCT_PACKAGES += \
-    FrameworksResDubai \
-    SystemUIResDubai
-
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -349,6 +328,18 @@ PRODUCT_PACKAGES += \
     libOmxG711Enc \
     libOmxQcelp13Enc \
     libstagefrighthw
+
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay \
+    $(LOCAL_PATH)/overlay-lineage
+
+PRODUCT_ENFORCE_RRO_TARGETS += *
+
+# Overlays-RRO
+PRODUCT_PACKAGES += \
+    CarrierConfigOverlay \
+    WifiOverlay
 
 # Perf
 PRODUCT_PACKAGES += \
