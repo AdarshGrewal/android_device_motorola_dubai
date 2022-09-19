@@ -111,6 +111,7 @@ USE_CUSTOM_AUDIO_POLICY := 1
 
 # Biometrics
 TARGET_SURFACEFLINGER_UDFPS_LIB := //$(DEVICE_PATH):libudfps_extension.dubai
+SOONG_CONFIG_qtidisplay_udfps := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
