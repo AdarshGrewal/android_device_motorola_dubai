@@ -594,5 +594,15 @@
         </interface>
         <fqname>@1.0::IQspmhal/default</fqname>
     </hal>
+    <hal format="hidl">
+        <name>vendor.egistec.hardware.fingerprint</name>
+        <transport>hwbinder</transport>
+        <version>4.0</version>
+        <interface>
+            <name>IBiometricsFingerprintRbs</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@4.0::IBiometricsFingerprintRbs/default</fqname>
+    </hal>
     <kernel target-level="5"/>
 </manifest>
