@@ -89,6 +89,10 @@ on fs && property:ro.boot.product.vendor.sku=lahaina
 on post-fs
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
+ 
+    # Sensors
+    chown system system /sys/devices/platform/soc/a94000.spi/spi_master/spi0/spi0.0/touchscreen/primary/double_tap_enabled
+    chown system system /sys/devices/platform/soc/a94000.spi/spi_master/spi0/spi0.0/touchscreen/primary/double_tap_pressed
 
 on late-fs
     wait_for_prop hwservicemanager.ready true
