@@ -647,8 +647,6 @@ vendor/lib64/camera/com.qti.sensormodule.mot_dubai_ov32b40_ofilm.bin
 vendor/lib64/camera/com.qti.sensormodule.mot_dubai_ov50a_sunny.bin
 vendor/lib64/camera/com.qti.sensormodule.mot_dubai_s5kjn1_qtech.bin
 
-# Camera - sensormodule
-
 # Camera - tuned
 vendor/lib/camera/com.qti.tuned.default.bin
 vendor/lib/camera/com.qti.tuned.mot_dubai_gc02m1b.bin
