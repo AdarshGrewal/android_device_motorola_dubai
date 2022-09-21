@@ -13,7 +13,7 @@
 // limitations under the License.
 
 cc_defaults {
-    name: "livedisplay_motorola_lahaina",
+    name: "livedisplay_dubai",
     defaults: ["hidl_defaults"],
     relative_install_path: "hw",
     srcs: [
@@ -40,8 +40,9 @@ cc_defaults {
 }
 
 cc_binary {
-    name: "vendor.lineage.livedisplay@2.1-service.motorola_lahaina",
-    init_rc: ["vendor.lineage.livedisplay@2.1-service.motorola_lahaina.rc"],
-    defaults: ["livedisplay_motorola_lahaina"],
+    name: "vendor.lineage.livedisplay@2.1-service.dubai",
+    vintf_fragments: ["vendor.lineage.livedisplay@2.1-service.dubai.xml"],
+    init_rc: ["vendor.lineage.livedisplay@2.1-service.dubai.rc"],
+    defaults: ["livedisplay_dubai"],
     vendor: true,
 }

@@ -135,6 +135,7 @@ vendor.qcom.bluetooth.soc=moselle
 
 # Camera
 camera.disable_zsl_mode=1
+persist.vendor.camera.physical.num=4
 
 # Crypto
 ro.crypto.dm_default_key.options_format.version=2
@@ -217,6 +218,9 @@ persist.vendor.ims.vt.enableadb=1
 # Incremental FS
 ro.incremental.enable=true
 
+# Motorola
+ro.mot.build.customerid=global
+
 # Media
 debug.stagefright.ccodec=4
 debug.stagefright.omx_default_rank=0
@@ -224,6 +228,7 @@ media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 
 # NFC
 ro.nfc.port=I2C
+ro.vendor.hw.nfc=st
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so

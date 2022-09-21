@@ -1,0 +1,97 @@
+import /vendor/etc/init/hw/init.vendor.st21nfc.rc
+
+on early-init && property:ro.bootmode=mot-factory
+    insmod /vendor/lib/modules/moto_f_usbnet.ko
+
+on early-init
+   exec_background u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules/${ro.vendor.mot.gki.path} mmi_annotate mmi_info mmi_relay
+
+on early-init
+   insmod /vendor/lib/modules/bm_adsp_ulog.ko
+   insmod /vendor/lib/modules/mmi_charger.ko
+   insmod /vendor/lib/modules/qti_glink_charger.ko
+   insmod /vendor/lib/modules/aw882xx_k504.ko
+   insmod /vendor/lib/modules/mmi_sys_temp.ko
+   insmod /vendor/lib/modules/wl2864c.ko
+   insmod /vendor/lib/modules/goodix_brl_mmi.ko
+   insmod /vendor/lib/modules/camera.ko
+   insmod /vendor/lib/modules/aw862x.ko
+   insmod /vendor/lib/modules/cci_intf.ko
+   insmod /vendor/lib/modules/qpnp_adaptive_charge.ko
+   start vendor.mmi_modules
+
+on fs
+    # egis fod ko
+    insmod /vendor/lib/modules/rbs_fps_mmi.ko
+
+on post-fs-data
+    mkdir /mnt/vendor/persist/tof 0755 vendor_tcmd camera
+    chown vendor_tcmd camera /mnt/vendor/persist/tof/refspad_cal
+    chown vendor_tcmd camera /mnt/vendor/persist/tof/xtalk_g1_cal
+    chown vendor_tcmd camera /mnt/vendor/persist/tof/xtalk_shape_cal
+    chown vendor_tcmd camera /mnt/vendor/persist/tof/xtalk_production_cal
+    chown vendor_tcmd camera /mnt/vendor/persist/tof/offset_cal
+    chmod 0640 /mnt/vendor/persist/tof/refspad_cal
+    chmod 0640 /mnt/vendor/persist/tof/xtalk_g1_cal
+    chmod 0640 /mnt/vendor/persist/tof/xtalk_shape_cal
+    chmod 0640 /mnt/vendor/persist/tof/xtalk_production_cal
+    chmod 0640 /mnt/vendor/persist/tof/offset_cal
+    # Param updater data for various modules
+    mkdir /data/vendor/param 0775 system system
+    # Add for Egis Fod fingerprint
+    mkdir /data/vendor/egis 0770 system system
+    mkdir /mnt/vendor/persist/egis 0770 system system
+    mkdir /data/vendor/tzstorage/egis 0770 system system
+    mkdir /data/vendor/egis/cqa  0770 system system
+
+    # Add for fod fps calibration
+    chown system system /sys/class/backlight/panel0-backlight/brightness
+    chown system system /sys/class/drm/card0-DSI-1/panelName
+    chown system system /sys/class/drm/card0-DSI-1/panelId
+    chown system system /d/dri/0/debug/motUtil
+    chmod 0666 /d/dri/0/debug/motUtil;
+    chmod 0666 /sys/class/backlight/panel0-backlight/brightness
+    chmod 0666 /sys/class/drm/card0-DSI-1/panelName
+    chmod 0666 /sys/class/drm/card0-DSI-1/panelId
+
+on early-boot
+    # Add for egis fingerprint
+    chown system system /dev/esfp0
+    chmod 0664 /dev/esfp0
+
+on boot
+    # allow TCMD to access cci for OIS test
+    chmod 0660 /dev/cci_intf
+    chown system camera /dev/cci_intf
+
+    #change adsp pmic test command file access permission
+    chown vendor_tcmd system /sys/devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:mmi,qti-glink-charger/tcmd
+    chown vendor_tcmd system /sys/devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:mmi,qti-glink-charger/force_pmic_icl
+    chown vendor_tcmd system /sys/devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qcom,battery_charger/force_charging_enable
+    chmod 0660 /sys/devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:mmi,qti-glink-charger/tcmd
+    chmod 0660 /sys/devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:mmi,qti-glink-charger/force_pmic_icl
+    chmod 0660 /sys/devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qcom,battery_charger/force_charging_enable
+    # Touch game mode control
+    chown system system /sys/class/touchscreen/primary/rotate
+    chmod 0660 /sys/class/touchscreen/primary/rotate
+    chown system system /sys/class/touchscreen/primary/interpolation
+    chmod 0660 /sys/class/touchscreen/primary/interpolation
+    chown system system /sys/class/touchscreen/primary/edge
+    chmod 0660 /sys/class/touchscreen/primary/edge
+    chown system system /sys/class/touchscreen/primary/first_filter
+    chmod 0660 /sys/class/touchscreen/primary/first_filter
+   # Set adaptive charging perms for HAL
+    chown system system /sys/module/qpnp_adaptive_charge/parameters/upper_limit
+    chown system system /sys/module/qpnp_adaptive_charge/parameters/lower_limit
+
+service capsense_reset /system/vendor/bin/capsense_reset
+   class core
+   user system
+   group system input
+   disabled
+
+on property:sys.boot_completed=1
+    start capsense_reset
+
+on property:persist.vendor.paramfile.parse_panel=1
+    write /sys/devices/platform/soc/soc:qcom,dsi-display-primary/dsi_display_parse_para "5"
