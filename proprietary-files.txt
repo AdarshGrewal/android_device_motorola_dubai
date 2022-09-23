@@ -697,8 +697,6 @@ vendor/etc/hdr_tm_config.xml
 vendor/lib64/libhdr_tm.so
 
 # Display - HWC
-vendor/bin/qdcmss
-vendor/etc/init/qdcmss.rc
 vendor/etc/snapdragon_color_libs_config.xml
 vendor/lib64/libdpps.so
 vendor/lib64/libhdrdynamic.so
