@@ -122,7 +122,6 @@
             <name>ISecureElement</name>
             <instance>SIM1</instance>
             <instance>SIM2</instance>
-            <instance>eSE1</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -319,15 +318,6 @@
         <interface>
             <name>IDspService</name>
             <instance>dspservice</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.qti.hardware.eid</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IEid</name>
-            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl">
