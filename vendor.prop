@@ -243,10 +243,6 @@ ro.vendor.perf-hal.ver=2.2
 # QSPM
 ro.vendor.qspm.enable=true
 
-# Qtee
-persist.vendor.qteeconnector.retrying_interval=30
-persist.vendor.qteeconnector.retrying_timeout=2000
-
 # Qualcomm System Daemon
 persist.vendor.qcomsysd.enabled=1
 
