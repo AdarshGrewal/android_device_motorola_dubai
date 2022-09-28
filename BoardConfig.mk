@@ -92,6 +92,9 @@ AB_OTA_PARTITIONS += \
     vendor_boot \
     vendor_dlkm
 
+# ANT+
+BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
+
 # Audio
 AUDIO_FEATURE_ENABLED_AHAL_EXT := false
 AUDIO_FEATURE_ENABLED_DLKM := true
