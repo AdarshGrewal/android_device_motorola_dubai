@@ -1023,7 +1023,7 @@ vendor/lib64/vendor.qti.memory.pasrmanager@1.1.so
 # MotCamera4
 -product/app/MotCamera3AI/MotCamera3AI.apk;PRESIGNED
 product/etc/init/init.motcamera3.lens.rc
--product/priv-app/MotCamera4/MotCamera4.apk;OVERRIDES=Camera2|110469721c6d2602405d07769420dfba2b36fe64
+-product/priv-app/MotCamera4/MotCamera4.apk;OVERRIDES=Camera2|012bc51e932a63d7c12c2c2a2f3f1b742098776b
 system_ext/etc/public.libraries-motocamera.txt
 system_ext/framework/com.motorola.androidx.camera.extensions.jar
 system_ext/lib/libmcf_native_window_helper.motocamera.so
