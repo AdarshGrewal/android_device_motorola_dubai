@@ -30,6 +30,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
 <resources>
+    <!-- Preferred max refresh rate at keyguard, if supported by the display. -->
+    <integer name="config_keyguardMaxRefreshRate">48</integer>
+
     <!-- Enable doze mode -->
     <bool name="doze_display_state_supported">true</bool>
 
