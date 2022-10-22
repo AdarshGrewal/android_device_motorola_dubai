@@ -3,7 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#define LOG_TAG "android.hardware.lights-service.dubai"
+#define MAXIMUM_DISPLAY_BRIGHTNESS 3514
+
 #include "Lights.h"
+#include <cmath>
+#include <fstream>
 #include <log/log.h>
 #include <android-base/logging.h>
 
@@ -85,6 +90,12 @@ ndk::ScopedAStatus Lights::setLightState(int id, const HwLightState& state) {
         .flashOffMS = state.flashOffMs,
         .brightnessMode = static_cast<int>(state.brightnessMode),
     };
+
+    // Scale display brightness.
+    if (id == (int)LightType::BACKLIGHT) {
+        legacyState.color = (state.color & 0xFF) * MAXIMUM_DISPLAY_BRIGHTNESS / 0xFF;
+    }
+
     int ret = hwLight->set_light(hwLight, &legacyState);
     switch (ret) {
         case -ENOSYS:
